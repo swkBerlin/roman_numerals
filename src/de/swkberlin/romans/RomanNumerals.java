@@ -25,7 +25,26 @@ public class RomanNumerals {
                 i -= entry.getKey();
                 result += entry.getValue();
             }
+
+            for (Map.Entry<Integer, String> subtractor : numerals.entrySet()) {
+                if (subtractor.getKey().toString().startsWith("5"))
+                    continue;
+                i = minusSubtractor(i, entry, subtractor);
+            }
+
         }
+
         return result;
+    }
+
+    private static int minusSubtractor(int i, Map.Entry<Integer, String> entry,
+                                       Map.Entry<Integer, String> subtractor) {
+        if (entry.getKey() > subtractor.getKey()) {
+            if (i == entry.getKey() - subtractor.getKey()) {
+                result += subtractor.getValue() + entry.getValue();
+                i -= entry.getKey();
+            }
+        }
+        return i;
     }
 }
